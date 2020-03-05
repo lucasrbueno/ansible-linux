@@ -1,0 +1,47 @@
+---
+- hosts: exemplo
+  remote_user: analista
+  become: yes
+  tasks:
+  - name: Download dos arquivos MySQL
+    get_url:
+       url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+       dest: /opt/mysql
+
+  - name: Instala os pacotes do MySQL de um arquivo local
+    yum:
+       name: /opt/mysql/mysql-community-release-el7-5.noarch.rpm
+       state: present
+
+  - name: Instala o  MySQL
+    yum: name=mysql-server state=installed
+   
+  - name: Download Java JRE
+    get_url:
+       url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm
+       dest: /opt/jre-8u60-linux-x64.rpm
+       headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+    
+  - name: Instala o Java JRE rpm de um arquivo local
+    yum:
+       name: /opt/jre-8u60-linux-x64.rpm
+       state: present
+
+  - name: Download do Java JDK
+    get_url:
+       url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm
+       dest: /opt/jdk-8u60-linux-x64.rpm
+       headers: 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+
+  - name: Instala o Java JDK rpm de um arquivo local
+    yum:
+       name: /opt/jdk-8u60-linux-x64.rpm
+       state: present
+
+  - name: Instala a ultima versao do Maven Apache
+    yum:
+       name: maven       
+       state: latest
+
+  - name: Instala o Nodejs
+    yum: name=nodejs state=present
