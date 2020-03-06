@@ -1,4 +1,4 @@
-
+---
 - hosts: exemplo
   remote_user: analista
   become: yes
@@ -51,4 +51,3 @@
 
   - name: Instala o Java 11 SDK
     apt: name=openjdk-11-jdk state=present
-
